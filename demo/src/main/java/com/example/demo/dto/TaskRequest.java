@@ -1,10 +1,12 @@
 package com.example.demo.dto;
 
-import com.example.demo.Model.Task;
+import com.example.demo.Model.EStatus;
+import com.example.demo.Model.EPriority;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskRequest {
@@ -16,7 +18,6 @@ public class TaskRequest {
     @Size(max = 500)
     private String description;
 
-    private Task.Status status = Task.Status.TODO;
-
-    private Task.Priority priority = Task.Priority.MEDIUM;
+    private EStatus status = EStatus.TODO;
+    private EPriority priority = EPriority.MEDIUM;
 }

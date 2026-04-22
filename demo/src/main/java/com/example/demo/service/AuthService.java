@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.*;
+import com.example.demo.Model.ERole;
 import com.example.demo.Model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.security.UserDetailsImpl;
@@ -36,13 +37,15 @@ public class AuthService {
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        Set<String> roles = new HashSet<>();
+        Set<ERole> roles = new HashSet<>();
         if (request.getRoles() == null || request.getRoles().isEmpty()) {
-            roles.add("ROLE_USER");
+            roles.add(ERole.ROLE_USER);
         } else {
             request.getRoles().forEach(role -> {
-                if (role.equals("admin")) roles.add("ROLE_ADMIN");
-                else roles.add("ROLE_USER");
+                switch (role.toLowerCase()) {
+                    case "admin" -> roles.add(ERole.ROLE_ADMIN);
+                    default -> roles.add(ERole.ROLE_USER);
+                }
             });
         }
         user.setRoles(roles);

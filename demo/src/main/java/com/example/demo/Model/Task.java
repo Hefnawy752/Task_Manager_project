@@ -16,14 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class Task {
 
-    public enum Status {
-        TODO, IN_PROGRESS, DONE
-    }
-
-    public enum Priority {
-        LOW, MEDIUM, HIGH
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -38,11 +30,11 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Status status = Status.TODO;
+    private EStatus status = EStatus.TODO;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Priority priority = Priority.MEDIUM;
+    private EPriority priority = EPriority.MEDIUM;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
