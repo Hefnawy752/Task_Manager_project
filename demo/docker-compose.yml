@@ -3,7 +3,7 @@ version: '3.8'
 services:
   postgres:
     image: postgres:16
-    container_name: task_manager-postgres
+    container_name: taskmanager-postgres
     environment:
       POSTGRES_DB: TaskManager
       POSTGRES_USER: postgres
@@ -24,7 +24,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: task_manager-app
+    container_name: taskmanager-app
     ports:
       - "8080:8080"
     environment:
@@ -36,6 +36,18 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    networks:
+      - taskmanager-network
+
+  angular:
+    build:
+      context: C:/Users/dell/task-manager-app
+      dockerfile: Dockerfile
+    container_name: taskmanager-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - springboot
     networks:
       - taskmanager-network
 
