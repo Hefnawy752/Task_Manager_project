@@ -19,6 +19,8 @@ public class TaskResponse {
     private String username;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+    private Long userId;
+    private Long createdById;
 
 
 }

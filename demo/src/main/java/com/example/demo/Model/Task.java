@@ -50,4 +50,8 @@ public class Task {
     @Version
     @Column(name = "version", nullable = false)
     private Integer version = 0;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "created_by_id", nullable = false)
+    private User createdBy;
 }

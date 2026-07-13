@@ -6,19 +6,22 @@ import com.example.demo.Model.Task;
 import org.mapstruct.*;
 
 @Mapper(componentModel = "spring")
-public interface  TaskMapper {
+public interface TaskMapper {
 
-    @Mapping(source = "user.username", target = "username")
+    @Mapping(target = "username", source = "user.username")
+        // DO NOT map userId or createdById here – we'll set them in the service
     TaskResponse toResponse(Task task);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Task toEntity(TaskRequest request);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "user", ignore = true)
+    @Mapping(target = "createdBy", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     void updateEntity(TaskRequest request, @MappingTarget Task task);

@@ -20,4 +20,7 @@ public class TaskRequest {
 
     private EStatus status = EStatus.TODO;
     private EPriority priority = EPriority.MEDIUM;
+
+    private Long userId;
+
 }
